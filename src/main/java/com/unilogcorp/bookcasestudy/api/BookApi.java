@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,15 +21,18 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin
 @RestController
 public class BookApi {
-    private static final String BOOK_URL = "/api/v1/bookcasestudy/book";
+    private static final String CREATE_BOOK_URL = "/api/v1/bookcasestudy/book/create";
+    private static final String UPDATE_BOOK_URL = "/api/v1/bookcasestudy/book/update";
+    private static final String DELETE_BOOK_URL = "/api/v1/bookcasestudy/book/delete/{id}";
+    private static final String GET_BOOK_URL = "/api/v1/bookcasestudy/book/get";
 
     @Autowired
     private BookSevice bookSevice;
 
-    @RequestMapping (value = BOOK_URL, method = RequestMethod.POST)
+    @RequestMapping (value = CREATE_BOOK_URL, method = RequestMethod.POST)
     public ResponseEntity<?> createBook(@RequestBody BookApiRequest bookApiRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity(new BindingResultHelper().getErrorMessage(BOOK_URL, bindingResult), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new BindingResultHelper().getErrorMessage(CREATE_BOOK_URL, bindingResult), HttpStatus.BAD_REQUEST);
         }
         try {
             ApiResponse apiResponse=new ApiResponse();
@@ -44,10 +48,10 @@ public class BookApi {
         }
     }
 
-    @RequestMapping (value = BOOK_URL, method = RequestMethod.PUT)
+    @RequestMapping (value = UPDATE_BOOK_URL, method = RequestMethod.PUT)
     public ResponseEntity<?> updateBook(@RequestBody BookApiRequest bookApiRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity(new BindingResultHelper().getErrorMessage(BOOK_URL, bindingResult), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new BindingResultHelper().getErrorMessage(UPDATE_BOOK_URL, bindingResult), HttpStatus.BAD_REQUEST);
         }
         try {
             ApiResponse apiResponse=new ApiResponse();
@@ -63,7 +67,7 @@ public class BookApi {
         }
     }
 
-    @RequestMapping (value = BOOK_URL, method = RequestMethod.GET)
+    @RequestMapping (value = GET_BOOK_URL, method = RequestMethod.GET)
     public ResponseEntity<?> getAllBook() {
         try {
             ApiResponse apiResponse=new ApiResponse();
@@ -80,16 +84,15 @@ public class BookApi {
         }
     }
 
-    @RequestMapping (value = BOOK_URL, method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteBookById() {
+    @RequestMapping (value = DELETE_BOOK_URL, method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteBookById(@PathVariable Long id) {
         try {
             ApiResponse apiResponse=new ApiResponse();
-            BookStatus bookStatus = bookSevice.getAllBook();
-            if (bookStatus.getStatus().equals(BookStatus.bookStatus.GET_LIST_OF_BOOK_SUCCESS)){
-                apiResponse.setStatus(ApiResponse.ApiStatus.GET_LIST_OF_BOOK_SUCCESS);
-                apiResponse.setData(bookStatus.getData());
+            BookStatus bookStatus = bookSevice.deleteBookById(id);
+            if (bookStatus.getStatus().equals(BookStatus.bookStatus.BOOK_DELETED)){
+                apiResponse.setStatus(ApiResponse.ApiStatus.BOOK_DELETED);
             }else {
-                apiResponse.setStatus(ApiResponse.ApiStatus.GET_LIST_OF_BOOK_FAIL);
+                apiResponse.setStatus(ApiResponse.ApiStatus.BOOK_NOT_DELETED);
             }
             return new ResponseEntity(apiResponse, HttpStatus.OK);
         } catch (Exception e) {

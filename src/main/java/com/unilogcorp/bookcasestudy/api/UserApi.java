@@ -20,15 +20,15 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin
 @RestController
 public class UserApi {
-    private static final String USER_URL = "/api/v1/bookcasestudy/user";
+    private static final String CREATE_USER_URL = "/api/v1/bookcasestudy/user/create";
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping (value = USER_URL, method = RequestMethod.POST)
+    @RequestMapping (value = CREATE_USER_URL, method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody UserApiRequest userApiRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity(new BindingResultHelper().getErrorMessage(USER_URL, bindingResult), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new BindingResultHelper().getErrorMessage(CREATE_USER_URL, bindingResult), HttpStatus.BAD_REQUEST);
         }
         try {
             ApiResponse apiResponse=new ApiResponse();

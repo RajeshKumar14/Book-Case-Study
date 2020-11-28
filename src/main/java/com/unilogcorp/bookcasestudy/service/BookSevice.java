@@ -44,7 +44,8 @@ public class BookSevice {
         try {
             String username = userService.getLoggedInUsername();
             if (username!=null){
-
+                bookPersistenceService.updateBookByUsername(bookApiRequest,username);
+                bookStatus.setStatus(BookStatus.bookStatus.BOOK_UPDATED);
             }else {
                 bookStatus.setStatus(BookStatus.bookStatus.INVALID_USER);
             }
@@ -66,6 +67,22 @@ public class BookSevice {
             }
         } catch (Exception e) {
             bookStatus.setStatus(BookStatus.bookStatus.GET_LIST_OF_BOOK_FAIL);
+        }
+        return bookStatus;
+    }
+
+    public BookStatus deleteBookById(long id) throws UsernameNotFoundException {
+        BookStatus bookStatus = new BookStatus();
+        try {
+            String username = userService.getLoggedInUsername();
+            if (username!=null){
+                bookPersistenceService.deleteBookById(id);
+                bookStatus.setStatus(BookStatus.bookStatus.BOOK_DELETED);
+            }else {
+                bookStatus.setStatus(BookStatus.bookStatus.INVALID_USER);
+            }
+        } catch (Exception e) {
+            bookStatus.setStatus(BookStatus.bookStatus.BOOK_NOT_DELETED);
         }
         return bookStatus;
     }

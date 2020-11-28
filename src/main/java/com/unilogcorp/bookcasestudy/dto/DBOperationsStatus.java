@@ -25,6 +25,8 @@ public class DBOperationsStatus {
         BOOK_NOT_UPDATED,
         GET_LIST_OF_BOOK_SUCCESS,
         GET_LIST_OF_BOOK_FAIL,
+        BOOK_DELETED,
+        BOOK_NOT_DELETED,
     }
 
     @JsonProperty ("status")
