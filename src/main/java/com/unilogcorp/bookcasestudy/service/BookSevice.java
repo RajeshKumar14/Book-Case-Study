@@ -54,6 +54,22 @@ public class BookSevice {
         return bookStatus;
     }
 
+    public BookStatus getAllBook() throws UsernameNotFoundException {
+        BookStatus bookStatus = new BookStatus();
+        try {
+            String username = userService.getLoggedInUsername();
+            if (username!=null){
+                bookStatus.setData(bookPersistenceService.getAllBook());
+                bookStatus.setStatus(BookStatus.bookStatus.GET_LIST_OF_BOOK_SUCCESS);
+            }else {
+                bookStatus.setStatus(BookStatus.bookStatus.INVALID_USER);
+            }
+        } catch (Exception e) {
+            bookStatus.setStatus(BookStatus.bookStatus.GET_LIST_OF_BOOK_FAIL);
+        }
+        return bookStatus;
+    }
+
     private Book prepareBook(BookApiRequest bookApiRequest, String username) {
         return new Book().builder().bookName(bookApiRequest.getBookName()).authors(bookApiRequest.getAuthors()).belongsTo(username)
                          .created_at(new Timestamp(new Date().getTime())).updated_at(new Timestamp(new Date().getTime())).build();

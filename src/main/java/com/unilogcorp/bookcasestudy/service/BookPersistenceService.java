@@ -28,4 +28,17 @@ public class BookPersistenceService {
         return dbOperationsStatus;
     }
 
+    public DBOperationsStatus getAllBook() throws UsernameNotFoundException {
+        DBOperationsStatus dbOperationsStatus = new DBOperationsStatus();
+        try {
+            dbOperationsStatus.setBookList(bookRepository.findAll());
+            dbOperationsStatus.setStatus(DBOperationsStatus.dbOperationsStatus.GET_LIST_OF_BOOK_SUCCESS);
+        } catch (Exception e) {
+            String message = "Error in getting Book Data from DB:";
+            log.error(message, e);
+            dbOperationsStatus.setStatus(DBOperationsStatus.dbOperationsStatus.GET_LIST_OF_BOOK_FAIL);
+        }
+        return dbOperationsStatus;
+    }
+
 }

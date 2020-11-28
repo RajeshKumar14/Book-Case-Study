@@ -19,8 +19,13 @@ public class BookStatus {
         INVALID_USER,
         BOOK_UPDATED,
         BOOK_NOT_UPDATED,
+        GET_LIST_OF_BOOK_SUCCESS,
+        GET_LIST_OF_BOOK_FAIL,
     }
 
     @JsonProperty ("status")
     private bookStatus status;
+
+    @JsonProperty ("data")
+    private Object data;
 }

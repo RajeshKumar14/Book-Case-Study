@@ -1,7 +1,9 @@
 package com.unilogcorp.bookcasestudy.dto;
 
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.unilogcorp.bookcasestudy.model.Book;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonInclude (JsonInclude.Include.NON_NULL)
 public class DBOperationsStatus {
+
     public enum dbOperationsStatus {
         USER_CREATED,
         USER_NOT_CREATED,
@@ -20,8 +23,14 @@ public class DBOperationsStatus {
         BOOK_NOT_CREATED,
         BOOK_UPDATED,
         BOOK_NOT_UPDATED,
+        GET_LIST_OF_BOOK_SUCCESS,
+        GET_LIST_OF_BOOK_FAIL,
     }
 
     @JsonProperty ("status")
     private dbOperationsStatus status;
+
+    @JsonProperty ("bookList")
+    private List<Book> bookList;
+
 }

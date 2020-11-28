@@ -20,6 +20,8 @@ public class ApiResponse {
         BOOK_NOT_CREATED,
         BOOK_UPDATED,
         BOOK_NOT_UPDATED,
+        GET_LIST_OF_BOOK_SUCCESS,
+        GET_LIST_OF_BOOK_FAIL,
     }
 
     @JsonProperty ("status")
