@@ -17,6 +17,8 @@ public class BookStatus {
         BOOK_CREATED,
         BOOK_NOT_CREATED,
         INVALID_USER,
+        BOOK_UPDATED,
+        BOOK_NOT_UPDATED,
     }
 
     @JsonProperty ("status")

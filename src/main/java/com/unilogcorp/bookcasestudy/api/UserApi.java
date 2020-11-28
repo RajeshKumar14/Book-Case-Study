@@ -4,15 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import com.unilogcorp.bookcasestudy.dto.ApiResponse;
 import com.unilogcorp.bookcasestudy.dto.UserApiRequest;
 import com.unilogcorp.bookcasestudy.dto.UserStatus;
 import com.unilogcorp.bookcasestudy.service.UserService;
 import com.unilogcorp.bookcasestudy.utils.BindingResultHelper;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@CrossOrigin
+@RestController
 public class UserApi {
     private static final String USER_URL = "/api/v1/bookcasestudy/user";
 

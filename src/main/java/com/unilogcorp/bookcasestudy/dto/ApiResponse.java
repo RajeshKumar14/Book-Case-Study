@@ -17,7 +17,9 @@ public class ApiResponse {
         USER_CREATED,
         USER_NOT_CREATED,
         BOOK_CREATED,
-        BOOK_NOT_CREATED
+        BOOK_NOT_CREATED,
+        BOOK_UPDATED,
+        BOOK_NOT_UPDATED,
     }
 
     @JsonProperty ("status")
