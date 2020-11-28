@@ -79,4 +79,21 @@ public class BookApi {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping (value = BOOK_URL, method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteBookById() {
+        try {
+            ApiResponse apiResponse=new ApiResponse();
+            BookStatus bookStatus = bookSevice.getAllBook();
+            if (bookStatus.getStatus().equals(BookStatus.bookStatus.GET_LIST_OF_BOOK_SUCCESS)){
+                apiResponse.setStatus(ApiResponse.ApiStatus.GET_LIST_OF_BOOK_SUCCESS);
+                apiResponse.setData(bookStatus.getData());
+            }else {
+                apiResponse.setStatus(ApiResponse.ApiStatus.GET_LIST_OF_BOOK_FAIL);
+            }
+            return new ResponseEntity(apiResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
