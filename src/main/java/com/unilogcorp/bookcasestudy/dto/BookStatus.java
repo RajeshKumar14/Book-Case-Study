@@ -1,0 +1,33 @@
+package com.unilogcorp.bookcasestudy.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude (JsonInclude.Include.NON_NULL)
+public class BookStatus {
+    public enum bookStatus {
+        BOOK_CREATED,
+        BOOK_NOT_CREATED,
+        INVALID_USER,
+        BOOK_UPDATED,
+        BOOK_NOT_UPDATED,
+        GET_LIST_OF_BOOK_SUCCESS,
+        GET_LIST_OF_BOOK_FAIL,
+        BOOK_DELETED,
+        BOOK_NOT_DELETED,
+    }
+
+    @JsonProperty ("status")
+    private bookStatus status;
+
+    @JsonProperty ("data")
+    private Object data;
+}
