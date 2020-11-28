@@ -15,7 +15,9 @@ import lombok.Setter;
 public class ApiResponse {
     public enum ApiStatus {
         USER_CREATED,
-        USER_NOT_CREATED
+        USER_NOT_CREATED,
+        BOOK_CREATED,
+        BOOK_NOT_CREATED
     }
 
     @JsonProperty ("status")

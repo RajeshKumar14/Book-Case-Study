@@ -12,14 +12,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude (JsonInclude.Include.NON_NULL)
-public class DBOperationsStatus {
-    public enum dbOperationsStatus {
-        USER_CREATED,
-        USER_NOT_CREATED,
+public class BookStatus {
+    public enum bookStatus {
         BOOK_CREATED,
-        BOOK_NOT_CREATED
+        BOOK_NOT_CREATED,
+        INVALID_USER,
     }
 
     @JsonProperty ("status")
-    private dbOperationsStatus status;
+    private bookStatus status;
 }

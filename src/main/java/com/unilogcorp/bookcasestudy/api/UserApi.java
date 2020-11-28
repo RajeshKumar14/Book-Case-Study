@@ -14,7 +14,7 @@ import com.unilogcorp.bookcasestudy.service.UserService;
 import com.unilogcorp.bookcasestudy.utils.BindingResultHelper;
 
 public class UserApi {
-    private static final String USER_URL = "/api/v1/bookcasestudy/create/user";
+    private static final String USER_URL = "/api/v1/bookcasestudy/user";
 
     @Autowired
     private UserService userService;

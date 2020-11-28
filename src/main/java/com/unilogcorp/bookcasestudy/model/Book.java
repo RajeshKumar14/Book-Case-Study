@@ -30,6 +30,12 @@ public class Book {
     @Column (name = "belongs_to")
     private String belongsTo;
 
+    @Column (name = "book_name")
+    private String bookName;
+
+    @Column (name = "authors")
+    private String authors;
+
     @Column (name = "created_at")
     private Timestamp created_at;
 

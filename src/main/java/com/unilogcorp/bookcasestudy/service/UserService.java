@@ -3,6 +3,7 @@ package com.unilogcorp.bookcasestudy.service;
 import java.sql.Timestamp;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,5 +48,16 @@ public class UserService implements UserDetailsService {
         return new User().builder().username(userApiRequest.getUsername()).password(userApiRequest.getPassword()).role(userApiRequest.getRole())
                          .enabled(Boolean.TRUE).created_at(new Timestamp(new Date().getTime())).updated_at(new Timestamp(new Date().getTime()))
                          .build();
+    }
+
+    public String getLoggedInUsername() {
+        String username = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return username;
     }
 }
